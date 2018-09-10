@@ -3,7 +3,9 @@
 
 int mas_menor_columnas = 0;
 float mas_menor_filas = 100;
+int menor_de_filas;
 int columna_pivote, fila_pivote;
+int seguir = 1;
 
 void maximizar( int matrix[MAX][MAX]){
 	extern int FILAS;
@@ -15,7 +17,7 @@ void maximizar( int matrix[MAX][MAX]){
 				columna_pivote = i;
 				if(  matrix[FUNCIONOBJETIVO][i] < mas_menor_columnas ){
 					columna_pivote = i;
-					mas_menor = matrix[FUNCIONOBJETIVO][i];
+					mas_menor_columnas = matrix[FUNCIONOBJETIVO][i];
 				}
 			}
 		}
@@ -25,29 +27,26 @@ void maximizar( int matrix[MAX][MAX]){
 				menor_de_filas = matrix[i][COLUMNAS - 1] / matrix[i][columna_pivote];
 				if( menor_de_filas < mas_menor_filas ){
 					mas_menor_filas = menor_de_filas;
-					filas_pivote = i; 
+					fila_pivote = i; 
 				}
 			}
 		}
 
 		/* divide entre la fila pivote entre el pivote */
 		for( int i = 0; i < COLUMNAS; i++ )
-			matrix[fila_pivote] /= matrix[fila_pivote][columna_pivote];
+			matrix[fila_pivote][i] /= matrix[fila_pivote][columna_pivote];
 		
 		for( int i = 0; i < FILAS; i++){
 			if( !(i == fila_pivote) ){
 				for( int j = 0; j < COLUMNAS; j++){
 					/*             fila vieja   -   (pivote de la fila   * fila entrantei ) */
-					matrix[i][j] = matrix[i][j] - ( matrix[i][columna_pivote] * matrix[fila_pivote][j])
+					matrix[i][j] = matrix[i][j] - ( matrix[i][columna_pivote] * matrix[fila_pivote][j]);
 				}
 			}
 		}
 		/* Verifica que no haya numero menor a cero en la funcion objetivo */
-		for( int i = 0; i < COLUMNAS; i++ ){
-			if( matrix[FUNCIONOBJETIVO][i] )
-				seguir = 1;
-			else 
+		for( int i = 0; i < COLUMNAS; i++ )
+			if( !(matrix[FUNCIONOBJETIVO][i] < 0) )
 				seguir = 0;
-		}
 	}
 }
