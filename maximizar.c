@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "metodoSimplex.h"
 
-int mas_menor_columnas = 0;
-float mas_menor_filas = 100;
-int menor_de_filas;
+double mas_menor_columnas = 0;
+double mas_menor_filas = 100;
+double menor_de_filas;
 int columna_pivote, fila_pivote;
 int seguir = 1;
 
-void maximizar( int matrix[MAX][MAX]){
+void maximizar( double matrix[MAX][MAX]){
 	extern int FILAS;
 	extern int COLUMNAS;
 	while( seguir == 1 ){

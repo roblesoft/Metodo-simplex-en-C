@@ -3,9 +3,9 @@
 #define FUNCIONOBJETIVO 0
 #define MAX 10
 
-void impresionDeDatos(int matrix[MAX][MAX]);
-void leerDatos(int matrix[MAX][MAX]);
-void maximizar( int matrix[MAX][MAX]);
+void impresionDeDatos(double matrix[MAX][MAX]);
+void leerDatos(double matrix[MAX][MAX]);
+void maximizar( double matrix[MAX][MAX]);
 
 #endif
 

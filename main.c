@@ -9,8 +9,9 @@ int main(){
 	scanf("%d", &FILAS);
 	printf("De cunatas columnas es la matriz?\n");
 	scanf("%d", &COLUMNAS);
-	int matrix[FILAS][COLUMNAS];
+	double matrix[FILAS][COLUMNAS];
 	leerDatos(matrix); 
+	impresionDeDatos(matrix);
 	printf("Desea Maximizar, o Minimizar");
 	scanf("%d", &operacion);
 	if( operacion == 1 ){
