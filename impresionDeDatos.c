@@ -14,7 +14,7 @@ void impresionDeDatos(double matrix[MAX][MAX]){
 			printf("\n");
 		}
 		for ( int j = 0; j < COLUMNAS; j++ ){
-			printf("\t\t | %.2f", matrix[i][j]);
+			printf("\t\t | %.2lf", matrix[i][j]);
 			if( j == COLUMNAS - 1)
 				printf("        |");
 		}

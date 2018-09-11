@@ -5,6 +5,7 @@ double mas_menor_columnas = 0;
 double mas_menor_filas = 100;
 double menor_de_filas;
 int columna_pivote, fila_pivote;
+double pivote, pivote_de_fila;
 int seguir = 1;
 
 void maximizar( double matrix[MAX][MAX]){
@@ -21,6 +22,7 @@ void maximizar( double matrix[MAX][MAX]){
 				}
 			}
 		}
+
 		/* Encuentra la fila pivote */
 		for( int i = 1; i < FILAS; i++ ){
 			if( matrix[i][COLUMNAS - 1] > 0){ 
@@ -33,13 +35,18 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 
 		/* divide entre la fila pivote entre el pivote */
+		pivote = matrix[fila_pivote][columna_pivote];
 		for( int i = 0; i < COLUMNAS; i++ )
-			matrix[fila_pivote][i] /= matrix[fila_pivote][columna_pivote];
-		
-		for( int i = 0; i < FILAS; i++)
-			if( !(i == fila_pivote) )
-				for( int j = 0; j < COLUMNAS; j++)
-					 matrix[i][j] = matrix[i][j] - ( matrix[i][columna_pivote] * matrix[fila_pivote][j]);
+			matrix[fila_pivote][i] =  matrix[fila_pivote][i] / pivote;
+			
+		for( int i = 0; i < FILAS; i++){
+			if( i != fila_pivote ){
+				pivote_de_fila = matrix[i][columna_pivote];
+				for( int j = 0; j < COLUMNAS; j++){
+					 matrix[i][j] = matrix[i][j] - ( pivote_de_fila * matrix[fila_pivote][j]);
+				}
+			}
+		}
 
 		/* Verifica que no haya numero menor a cero en la funcion objetivo */
 		for( int i = 0; i < COLUMNAS; i++ )
