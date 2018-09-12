@@ -8,21 +8,33 @@ void impresionDeDatos(double matrix[MAX][MAX]){
 		if( i == 0 ){
 			for( int w = 0; w < COLUMNAS; w++ ){
 				if( w == 0 )
-					printf("\t\t  ");
-				printf("----------------");
+					printf("\t");
+				printf("----------");
 			}
 			printf("\n");
 		}
+		printf("\t");
 		for ( int j = 0; j < COLUMNAS; j++ ){
-			printf("\t\t | %.2lf", matrix[i][j]);
-			if( j == COLUMNAS - 1)
-				printf("        |");
+			if(matrix[i][j] >= 100 || matrix[i][j] <= -10)
+				printf("| %.2lf  ", matrix[i][j]);
+			else if( matrix[i][j] >= 10  || matrix[i][j] < 0)
+				printf("| %.2lf   ", matrix[i][j]);
+			else if( matrix[i][j] < 10 )
+				printf("| %.2lf    ", matrix[i][j]);
+			if( j == COLUMNAS - 1){
+				if(matrix[i][j] >= 100)
+					printf("|", matrix[i][j]);
+				else if( matrix[i][j] >= 10 )
+					printf("|", matrix[i][j]);
+				else if( matrix[i][j] < 10 )
+					printf("|", matrix[i][j]);
+			}
 		}
 		printf("\n");
 		for( int w = 0; w < COLUMNAS; w++ ){
 			if( w == 0 )
-				printf("\t\t  ");
-			printf("----------------");
+				printf("\t");
+			printf("----------");
 		}
 		printf("\n");
 	}
