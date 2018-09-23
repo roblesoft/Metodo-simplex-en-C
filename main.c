@@ -13,6 +13,7 @@
 #include "metodoSimplex.h"
 
 int FILAS, COLUMNAS, operacion; 
+int variables_de_decision;
 
 int main(){
 	printf("Metodo Simplex\n");
@@ -20,6 +21,8 @@ int main(){
 	scanf("%d", &FILAS);
 	printf("De cunatas columnas es la matriz?\n");
 	scanf("%d", &COLUMNAS);
+	printf("Cuantas variables de decision tiene?\t");
+	scanf("%d", &variables_de_decision);
 	/* se declara la matriz */
 	double matrix[FILAS][COLUMNAS];
 	leerDatos(matrix); 
@@ -30,6 +33,5 @@ int main(){
 		/* se hace el metodo simplex para maximizar */
 		maximizar( matrix );
 	}
-	impresionDeDatos(matrix);
 	return 0;
 }

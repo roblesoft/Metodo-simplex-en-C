@@ -49,6 +49,6 @@ void minimizar( double matrix[MAX][MAX]){
 
 	/* Verifica que no haya numero menor a cero en la funcion objetivo */
 	for( int i = 0; i < COLUMNAS; i++ )
-		if( matrix[FUNCIONOBJETIVO][i] < 0 )
+		if( matrix[FUNCIONOBJETIVO][i] > 0 )
 			minimizar(matrix);
 }
