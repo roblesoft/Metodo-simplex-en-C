@@ -86,7 +86,7 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 	//muestra la siguiente tabla si hay otra iteracion 
-	printf("\t========Tabla #%d========\n",numero_de_tabla);
+	printf("\t\t========Tabla #%d========\n",numero_de_tabla);
 	impresionDeDatos(matrix);
 
 	/* Verifica que no haya numero menor a cero en la funcion objetivo */
