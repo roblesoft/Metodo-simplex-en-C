@@ -7,6 +7,7 @@ double menor_de_filas;
 int columna_pivote, fila_pivote;
 double pivote, pivote_de_fila;
 int seguir = 1;
+int vars[MAX];
 
 void maximizar( double matrix[MAX][MAX]){
 	extern int FILAS;
@@ -14,6 +15,11 @@ void maximizar( double matrix[MAX][MAX]){
 		/* Encuentra el numero mas negativo de la funcion objetivo  para obtener la columna pivote*/
 	mas_menor_columnas = 0;
 	mas_menor_filas = 100;
+
+	for( int i = 0; i < COLUMNAS - 1; i++){
+		vars[i] = 0;
+	}
+
 	for( int i = 0; i < COLUMNAS - 1; i++ ){
 		if( matrix[FUNCIONOBJETIVO][i] < 0 ){
 			if(  matrix[FUNCIONOBJETIVO][i] < mas_menor_columnas ){
@@ -23,9 +29,12 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 
+	vars[columna_pivote] = 1;
+
 	/* Encuentra la fila pivote */
 	for( int i = 1; i < FILAS; i++ ){
-		if( matrix[i][COLUMNAS - 1] > 0){ 
+		/* se comprueba que el columan pivote y el coeficiente de las variables basicas sean mayores que 0 */
+		if( matrix[i][COLUMNAS - 1] > 0 && matrix[i][columna_pivote] > 0){ 
 			menor_de_filas = matrix[i][COLUMNAS - 1] / matrix[i][columna_pivote];
 			if( menor_de_filas < mas_menor_filas ){ 
 				mas_menor_filas = menor_de_filas; 
@@ -52,4 +61,12 @@ void maximizar( double matrix[MAX][MAX]){
 	for( int i = 0; i < COLUMNAS; i++ )
 		if( matrix[FUNCIONOBJETIVO][i] < 0 )
 			maximizar(matrix);
+
+	if( mas_menor_filas == 100)
+		printf("Solucion no acotada\t");
+
+	for( int i = 0; i < 3 ; i++){
+		if( vars[i] == 1 && matrix[FUNCIONOBJETIVO][i] == 0)
+			printf("Solucion multiple\t");
+	}
 }
