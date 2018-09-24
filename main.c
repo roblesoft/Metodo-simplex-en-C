@@ -24,7 +24,7 @@ int main(){
 	scanf("%d", &COLUMNAS);
 	printf("Cuantas variables de decision tiene?\t");
 	scanf("%d", &variables_de_decision);
-	printf("Cuantas variables artificiales tiene?\t");
+	printf("Hay variables artificiales?(si: 1/ no: 0)\n");
 	scanf("%d", &variables_artificiales);
 	/* se declara la matriz */
 	double matrix[FILAS][COLUMNAS];

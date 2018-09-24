@@ -22,10 +22,14 @@ void variablesBasicas(int vars[MAX]){
 				vars[i] = 1;
 		}
 }
+
 void variablesArtificiales(int vars[MAX]){
+	/***********************
+	  hace dos arreglos, uno con las variables con caracterres y otro con 1 por que pertence a la base
+	  **********************/
 	extern int variables_artificiales;
 	extern int FILAS;
-	if(variables_artificiales > 0){
+	if(variables_artificiales == 1){
 		printf("cuales son las variables basicas");
 		for(int i = 0; i < FILAS; i++){
 			printf("renglon %d =>", i );
@@ -72,9 +76,6 @@ void maximizar( double matrix[MAX][MAX]){
 
 	//la columna pivote que entra se convierte en variable basica
 	vars[columna_pivote] = 1;
-	for( int i = 0; i < COLUMNAS -1; i++)
-		printf("vars[%d] = %d", i, vars[i]);
-	printf("\n");
 
 	/* Encuentra la fila pivote */
 	for( int i = 1; i < FILAS; i++ ){
@@ -101,6 +102,7 @@ void maximizar( double matrix[MAX][MAX]){
 	for( int i = 0; i < COLUMNAS; i++ )
 		matrix[fila_pivote][i] =  matrix[fila_pivote][i] / pivote;
 		
+	//se realiza el algoritmo en todas las filas
 	for( int i = 0; i < FILAS; i++){
 		if( i != fila_pivote ){
 			pivote_de_fila = matrix[i][columna_pivote];
@@ -110,7 +112,7 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 	//muestra la siguiente tabla si hay otra iteracion 
-	printf("\t\t========Tabla #%d========\n",numero_de_tabla);
+	printf("\t\t\t========Tabla #%d========\n",numero_de_tabla);
 	impresionDeDatos(matrix);
 
 	/* Verifica que no haya numero menor a cero en la funcion objetivo */
@@ -118,10 +120,15 @@ void maximizar( double matrix[MAX][MAX]){
 		if( matrix[FUNCIONOBJETIVO][i] < 0 )//si sigue habiendo numeros negativos en el renglon 0 el algoritmo se vuelve a ejecutar
 			maximizar(matrix);
 
-	if( variables_artificiales > 0 ){
+	printf("%d", variables_artificiales);
+	if( variables_artificiales == 1 ){
 		for(int i = 0; i < FILAS; i++){
-			if( vars_artificiales[i] == 0 && base[i] == 'a' )
-				printf("solucion infactible");
+			// compara en los dos arreglos de las variables base
+			// si la variable artificial nombrada con 'a' no salio, osea que en el segundo arreglo sigue teniendo 1 por que sigue en la base, dando resultado como solucion infactible
+			printf("%d => %c\n", vars_artificiales[i], base[i]);
+			if( vars_artificiales[i] == 1 && base[i] == 'a' ){
+				printf("Solucion infactible\n");
+			}
 		}
 	}
 
