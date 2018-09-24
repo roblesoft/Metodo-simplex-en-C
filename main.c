@@ -14,6 +14,7 @@
 
 int FILAS, COLUMNAS, operacion; 
 int variables_de_decision;
+int variables_artificiales;
 
 int main(){
 	printf("Metodo Simplex\n");
@@ -23,6 +24,8 @@ int main(){
 	scanf("%d", &COLUMNAS);
 	printf("Cuantas variables de decision tiene?\t");
 	scanf("%d", &variables_de_decision);
+	printf("Cuantas variables artificiales tiene?\t");
+	scanf("%d", &variables_artificiales);
 	/* se declara la matriz */
 	double matrix[FILAS][COLUMNAS];
 	leerDatos(matrix); 

@@ -8,6 +8,8 @@ int columna_pivote, fila_pivote;
 double pivote, pivote_de_fila;
 int vars[MAX];
 int numero_de_tabla = 0;
+int vars_artificiales[MAX];
+char base[MAX];
 
 void variablesBasicas(int vars[MAX]){
 	extern int COLUMNAS;
@@ -20,20 +22,39 @@ void variablesBasicas(int vars[MAX]){
 				vars[i] = 1;
 		}
 }
+void variablesArtificiales(int vars[MAX]){
+	extern int variables_artificiales;
+	extern int FILAS;
+	if(variables_artificiales > 0){
+		printf("cuales son las variables basicas");
+		for(int i = 0; i < FILAS; i++){
+			printf("renglon %d =>", i );
+			scanf("%s", &base[i]);
+		}
+		for( int i = 0; i < FILAS; i++)
+			printf("=>%c \n", base[i]); 
+		// si hay variables aritificiales se inician con 1 para saber que estan en la base
+		for(int i = 0; i < FILAS; i++){
+			vars[i] = 1;
+		}
+	}
+}
 
 void maximizar( double matrix[MAX][MAX]){
 	extern int FILAS;
 	extern int COLUMNAS;
 	extern int variables_de_decision;
+	extern int variables_artificiales;
 	mas_menor_columnas = 0;
 	mas_menor_filas = 100;
 	++numero_de_tabla;
 
 	/* las variables basicas se representan con 1 en su posicion
 	   y las no basicas con 0 */
-	if( numero_de_tabla == 1)
+	if( numero_de_tabla == 1){
+		variablesArtificiales(vars_artificiales);
 		variablesBasicas(vars);
-	
+	}
 
 	/* Encuentra el numero mas negativo de la funcion objetivo  para obtener la columna pivote*/
 	for( int i = 0; i < COLUMNAS - 1; i++ ){
@@ -67,8 +88,11 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 
+	vars_artificiales[fila_pivote] = 0;
+
 	// si la variable mas_menor_filas sigue siendo 100 significa que el PL tiene una solucion no acotada 
 	// ya que las variables debajo de la variable de entrada tienen coefieciente negativo
+	// y salta hacia la terminacion del algoritmo
 	if( mas_menor_filas == 100)
 		goto solucionNoAcotada;
 
@@ -93,6 +117,13 @@ void maximizar( double matrix[MAX][MAX]){
 	for( int i = 0; i < COLUMNAS; i++ )
 		if( matrix[FUNCIONOBJETIVO][i] < 0 )//si sigue habiendo numeros negativos en el renglon 0 el algoritmo se vuelve a ejecutar
 			maximizar(matrix);
+
+	if( variables_artificiales > 0 ){
+		for(int i = 0; i < FILAS; i++){
+			if( vars_artificiales[i] == 0 && base[i] == 'a' )
+				printf("solucion infactible");
+		}
+	}
 
 	solucionNoAcotada:
 		if( mas_menor_filas == 100)
