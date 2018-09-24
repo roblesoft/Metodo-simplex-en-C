@@ -89,7 +89,11 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 
-	vars_artificiales[fila_pivote] = 0;
+	//verifica si la ultima columna de las restricciones es la que sale, ya que en esa columna se encuantran las variables artificiales
+	if( columna_pivote == (COLUMNAS - 2) && base[fila_pivote]== 'a')
+		vars_artificiales[fila_pivote] = 0;
+	else 
+		vars_artificiales[fila_pivote] = 1;
 
 	// si la variable mas_menor_filas sigue siendo 100 significa que el PL tiene una solucion no acotada 
 	// ya que las variables debajo de la variable de entrada tienen coefieciente negativo
@@ -120,7 +124,6 @@ void maximizar( double matrix[MAX][MAX]){
 		if( matrix[FUNCIONOBJETIVO][i] < 0 )//si sigue habiendo numeros negativos en el renglon 0 el algoritmo se vuelve a ejecutar
 			maximizar(matrix);
 
-	printf("%d", variables_artificiales);
 	if( variables_artificiales == 1 ){
 		for(int i = 0; i < FILAS; i++){
 			// compara en los dos arreglos de las variables base
@@ -136,11 +139,12 @@ void maximizar( double matrix[MAX][MAX]){
 		if( mas_menor_filas == 100)
 			printf("Solucion no acotada\n");
 
+	//revisa si una variable que no haya entrado a la base en el renglon 1 tiene en el renglon 1 tiene 00
 	for( int i = 0; i < variables_de_decision ; i++){
 		if( vars[i] == 0 && matrix[FUNCIONOBJETIVO][i] == 0)
 			printf("Solucion multiple\n");
 	}
 
 	terminacion: 
-		printf("terminacion\n");
+		printf("\n");
 }
