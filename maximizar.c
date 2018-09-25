@@ -89,12 +89,12 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 
-	//verifica si la ultima columna de las restricciones es la que sale, ya que en esa columna se encuantran las variables artificiales
-	if( columna_pivote == (COLUMNAS - 2) && base[fila_pivote]== 'a')
+	printf("tabla #%d columna pivote = %d (columnas -2) = %d base[fila_pivote] = %c filapivote %d\n", numero_de_tabla, columna_pivote, COLUMNAS -2, base[fila_pivote], fila_pivote);
+	if( columna_pivote != (COLUMNAS - 2) || base[fila_pivote] != 'a'){
+		printf("sale de la base %c\n", base[fila_pivote]);
 		vars_artificiales[fila_pivote] = 0;
-	else 
-		vars_artificiales[fila_pivote] = 1;
-
+	}
+	
 	// si la variable mas_menor_filas sigue siendo 100 significa que el PL tiene una solucion no acotada 
 	// ya que las variables debajo de la variable de entrada tienen coefieciente negativo
 	// y salta hacia la terminacion del algoritmo
