@@ -89,7 +89,9 @@ void maximizar( double matrix[MAX][MAX]){
 		}
 	}
 
-	printf("tabla #%d columna pivote = %d (columnas -2) = %d base[fila_pivote] = %c filapivote %d\n", numero_de_tabla, columna_pivote, COLUMNAS -2, base[fila_pivote], fila_pivote);
+	//printf("tabla #%d columna pivote = %d (columnas -2) = %d base[fila_pivote] = %c filapivote %d\n", numero_de_tabla, columna_pivote, COLUMNAS -2, base[fila_pivote], fila_pivote);
+	//solo no saldra de la base si la fila pivote es en donde esta la variable artificial y la si coincide que la columna pivote sea la misma en donde esta 
+	//la variable artifial
 	if( columna_pivote != (COLUMNAS - 2) || base[fila_pivote] != 'a'){
 		printf("sale de la base %c\n", base[fila_pivote]);
 		vars_artificiales[fila_pivote] = 0;
@@ -128,7 +130,7 @@ void maximizar( double matrix[MAX][MAX]){
 		for(int i = 0; i < FILAS; i++){
 			// compara en los dos arreglos de las variables base
 			// si la variable artificial nombrada con 'a' no salio, osea que en el segundo arreglo sigue teniendo 1 por que sigue en la base, dando resultado como solucion infactible
-			printf("%d => %c\n", vars_artificiales[i], base[i]);
+			//printf("%d => %c\n", vars_artificiales[i], base[i]);
 			if( vars_artificiales[i] == 1 && base[i] == 'a' ){
 				printf("Solucion infactible\n");
 			}
